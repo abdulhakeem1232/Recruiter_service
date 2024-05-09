@@ -4,13 +4,13 @@ import bcrypt from 'bcryptjs'
 export interface Recuiter extends Document{
     username:string;
     email:string;
-    mobile:number;
+    mobile:string;
     companyName:string;
     avatar?:string;
     password:string;
     companyemail:string;
     status:boolean;
-
+    isActive:boolean;
     matchPassword: (enteredPassword: string) => Promise<boolean>
 }
 
@@ -24,7 +24,7 @@ const RecuiterSchema :Schema<Recuiter>=new Schema({
         required:true
     },
     mobile:{
-        type:Number,
+        type:String,
     },
     companyName:{
         type:String,
@@ -36,7 +36,6 @@ const RecuiterSchema :Schema<Recuiter>=new Schema({
     },
     companyemail:{
         type:String,
-        required:false
     },
     password:{
         type:String,
@@ -45,6 +44,10 @@ const RecuiterSchema :Schema<Recuiter>=new Schema({
     status:{
         type:Boolean,
         default:false
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     },
 })
 

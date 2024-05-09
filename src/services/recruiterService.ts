@@ -7,7 +7,7 @@ dotenv.config();
 interface User{
     username:string;
     email:string;
-    mobile:number;
+    mobile:string;
     companyName:string;
     companyEmail:string;
     password:string; 
