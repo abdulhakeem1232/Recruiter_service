@@ -5,6 +5,17 @@ interface Login {
     email: string;
     password:string; 
 }
+interface Recruiter {
+    username: string;
+    email: string;
+    mobile:string
+    password:string;
+    isActive?:boolean;
+    status:boolean;
+    companyName:string;
+    companyemail:string;
+   
+}
 export const Repository={
     findByEmail:async(email:string): Promise<Recuiter| null>=>{
         try{
@@ -57,5 +68,40 @@ export const Repository={
             console.log('error',err);
             
         }
-    }
+    },
+    getall:async()=>{
+        try{
+const users=await RecuiterModel.find({},
+    {'_id':1,'username':1,'email':1,'mobile':1,'isActive':1,'status':1,'companyName':1,'companyemail':1})
+console.log('users',users);
+return users
+        }catch(err){
+            console.error(`Error on getting all user: ${err}`);
+            return null;
+        }
+    },
+    updateStatus:async(User:Recruiter)=>{
+        try{
+            console.log(User.email,'ww');
+            
+const user=await RecuiterModel.updateOne({email:User.email},{$set:{isActive:!User.isActive}})
+console.log('user',user);
+return true
+        }catch(err){
+            console.error(`Error on getting all user: ${err}`);
+            return null;
+        }
+    },
+    updateApprove:async(User:Recruiter)=>{
+        try{
+            console.log(User.email,'ww');
+            
+const user=await RecuiterModel.updateOne({email:User.email},{$set:{status:true}})
+console.log('user',user);
+return true
+        }catch(err){
+            console.error(`Error on getting all user: ${err}`);
+            return null;
+        }
+    },
 }

@@ -1,5 +1,7 @@
 import { Request } from "express";
 import { service } from "../services/recruiterService";
+import {Repository} from '../repository/recruiterRepository'
+
 
 
 export const recuiterController={
@@ -55,6 +57,61 @@ export const recuiterController={
         }catch (err) {
           callback(err);
         } 
+      },
+      getall:async(call:any,callback:any)=>{
+        try{
+          console.log('get controlerr');
+          let users=await Repository.getall()
+          console.log(users,'uuu');
+          const response = {
+            users: users 
+        };
+          callback(null,response)
+        }catch(err){
+          callback(err);
+        }
+      },
+      updateStatus:async(call:any,callback:any)=>{
+        try{
+          console.log('get controlerrstatus upadte');
+          let user=await Repository.findByEmail(call.request.email)
+          let update,users;
+      
+          if(user){
+         update = await Repository.updateStatus( user );
+          }
+          if(update){
+         users=await Repository.getall()
+          }
+          console.log(user,'uuu');
+          const response = {
+            users: users 
+        };
+          callback(null,response)
+        }catch(err){
+          callback(err);
+        }
+      },
+      updateApproval:async(call:any,callback:any)=>{
+        try{
+          console.log('get controlerrstatus upadte');
+          let user=await Repository.findByEmail(call.request.email)
+          let update,users;
+      
+          if(user){
+         update = await Repository.updateApprove( user );
+          }
+          if(update){
+         users=await Repository.getall()
+          }
+          console.log(user,'uuu');
+          const response = {
+            users: users 
+        };
+          callback(null,response)
+        }catch(err){
+          callback(err);
+        }
       },
       
 }

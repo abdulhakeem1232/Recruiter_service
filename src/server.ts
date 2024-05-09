@@ -31,6 +31,9 @@ const grpcServer = () => {
     Register:recuiterController.signup,
     OtpVerify:recuiterController.otp,
     Login:recuiterController.login,
+    Getall:recuiterController.getall,
+    UpdateStatus:recuiterController.updateStatus,
+    Approval:recuiterController.updateApproval
   })
   
   grpcServer();
