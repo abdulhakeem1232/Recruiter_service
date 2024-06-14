@@ -7,6 +7,7 @@ service RecuiterServices {
     rpc Getall(Empty) returns (GetAllUsersResponse){};
     rpc UpdateStatus(UserData) returns (GetAllUsersResponse){};
     rpc Approval(UserData) returns (GetAllUsersResponse){};
+    rpc GetStatus(statusRequest) returns (statusResponse){};
 }
 
 message Empty {
@@ -22,6 +23,8 @@ message UserData {
     string companyName = 6;
     bool isActive = 7;
     bool status = 8;
+    string avatar = 9;
+    string _id = 10;
 }
 
 message RegistrationResponse {
@@ -40,6 +43,8 @@ message OtpVerifyRequest {
 message OtpVerifyResponse {
     bool success = 1;
     string message = 2;
+    UserData user = 3;
+
 }
 
 message LoginRequest {
@@ -49,8 +54,17 @@ message LoginRequest {
 
 message LoginResponse {
     bool success = 1;
+    UserData user = 2;
 }
 
 message GetAllUsersResponse {
     repeated UserData users = 1;
+}
+
+message statusRequest {
+  string userId = 1;
+}
+
+message statusResponse {
+  bool status = 1;
 }
