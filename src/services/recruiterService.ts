@@ -67,5 +67,13 @@ export const service = {
             throw new Error(`Failed to sign up: ${err}`);
         }
     },
+    getChartDetails: async (year: number, month: number) => {
+        try {
+            let response = await Repository.getChartDetails(year, month)
+            return response
+        } catch (err) {
+            throw new Error(`Failed to sign up: ${err}`);
+        }
+    },
 
 }

@@ -35,6 +35,7 @@ server.addService(recruiterProto.RecuiterServices.service, {
   UpdateStatus: recuiterController.updateStatus,
   Approval: recuiterController.updateApproval,
   GetStatus: recuiterController.getStatus,
+  GetReports: recuiterController.getRecruiterReports,
 })
 
 grpcServer();

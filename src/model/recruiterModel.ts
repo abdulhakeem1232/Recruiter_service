@@ -9,6 +9,7 @@ export interface Recuiter extends Document {
     avatar?: string;
     password: string;
     companyemail: string;
+    createdAt: Date;
     status: boolean;
     isActive: boolean;
     matchPassword: (enteredPassword: string) => Promise<boolean>
@@ -50,6 +51,11 @@ const RecuiterSchema: Schema<Recuiter> = new Schema({
         type: Boolean,
         default: true
     },
+    createdAt:
+    {
+        type: Date,
+        default: Date.now
+    }
 })
 
 //pre-save password

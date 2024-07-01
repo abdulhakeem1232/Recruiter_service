@@ -1,8 +1,5 @@
-import { Request } from "express";
 import { service } from "../services/recruiterService";
 import { Repository } from '../repository/recruiterRepository'
-
-
 
 export const recuiterController = {
   signup: async (call: any, callback: any) => {
@@ -118,6 +115,16 @@ export const recuiterController = {
       const { userId } = call.request;
       let response = await Repository.getStatus(userId)
       console.log('controller', response);
+      callback(null, response)
+    } catch (err) {
+      callback(err)
+    }
+  },
+  getRecruiterReports: async (call: any, callback: any) => {
+    try {
+      const currentYear = new Date().getFullYear()
+      const month = new Date().getMonth()
+      let response = await service.getChartDetails(currentYear, month)
       callback(null, response)
     } catch (err) {
       callback(err)
