@@ -19,7 +19,6 @@ interface Login {
 export const service = {
     register: async (userdata: User) => {
         try {
-            console.log('service', userdata);
             const email = userdata.email
             if (email == undefined) {
                 throw new Error("Email is undefined");
@@ -32,41 +31,34 @@ export const service = {
             console.log(otp, email);
 
             await emailVerification(email, otp)
-            console.log('email sended');
             return { success: true, message: "Verification email sent", otp: otp, user_data: userdata };
         } catch (err) {
             console.log("ERROR:", err);
-
         }
     },
+
     verifyOtp: async (enterOtp: string, otp: string, userdata: User) => {
         try {
-            console.log(otp, 'serviceotp');
-
             if (otp == enterOtp) {
-                console.log(userdata, 'enkwenadk');
-
                 const usercreated = await Repository.createUser(userdata);
                 return { success: true, message: 'Correct OTP' };
-
             } else {
-
                 return { success: false, message: 'Invalid OTP' };
             }
-
         } catch (error) {
             throw new Error(`Failed to sign up: ${error}`);
         }
     },
+
     verifyLogin: async (userdata: Login) => {
         try {
             const loginResponse = await Repository.validateUser(userdata)
-            console.log('00000', loginResponse);
             return loginResponse
         } catch (err) {
             throw new Error(`Failed to sign up: ${err}`);
         }
     },
+
     getChartDetails: async (year: number, month: number) => {
         try {
             let response = await Repository.getChartDetails(year, month)
