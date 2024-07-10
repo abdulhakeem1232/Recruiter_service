@@ -12,10 +12,11 @@ const packageDefinition = protoLoader.loadSync(path.join(__dirname, "proto/recru
 const recruiterProto = grpc.loadPackageDefinition(packageDefinition) as any;
 
 const server = new grpc.Server();
+const Domain = process.env.NODE_ENV === 'dev' ? "0.0.0.0" : process.env.PRO_DOMAIN_RECRUITER
 
 const grpcServer = () => {
   server.bindAsync(
-    `0.0.0.0:${process.env.PORT}`,
+    `${Domain}:${process.env.RECRUITER_PORT}`,
     grpc.ServerCredentials.createInsecure(),
     (err, port) => {
       if (err) {

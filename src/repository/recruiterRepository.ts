@@ -76,7 +76,9 @@ export const Repository = {
         try {
             const user = await RecuiterModel.findOne({ email: userdata.email });
             console.log(user);
-            if (user?.isActive == false || user?.status == false) return false
+            if (user?.isActive == false) return { success: false, message: "You are Blocked" }
+            console.log(user);
+            if (user?.status == false) return { success: false, message: "You are Not Verified" }
 
             if (user) {
                 console.log(userdata.password);
