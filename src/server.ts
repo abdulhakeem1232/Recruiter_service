@@ -12,7 +12,8 @@ const packageDefinition = protoLoader.loadSync(path.join(__dirname, "proto/recru
 const recruiterProto = grpc.loadPackageDefinition(packageDefinition) as any;
 
 const server = new grpc.Server();
-const Domain = process.env.NODE_ENV === 'dev' ? "0.0.0.0" : process.env.PRO_DOMAIN_RECRUITER
+const Domain = process.env.NODE_ENV === 'dev' ? "0.0.0.0" : "0.0.0.0";
+// const Domain = "0.0.0.0";
 
 const grpcServer = () => {
   server.bindAsync(
